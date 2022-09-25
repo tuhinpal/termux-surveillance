@@ -1,0 +1,16 @@
+{
+  "name": "termux-surveillance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Tuhin Kanti Pal <me@thetuhin.com>",
+  "license": "ISC",
+  "dependencies": {
+    "deta": "1.1.0",
+    "dotenv": "10.0.0"
+  }
+}
