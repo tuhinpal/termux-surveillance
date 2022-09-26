@@ -44,31 +44,30 @@ async function handler({ number, body } /** termux message object */) {
       await execFile("termux-torch", ["on"]);
     }
 
-    // take photo
     const photoId = new Date().getTime() + ".jpg";
-    await execFile("termux-camera-photo", [
-      "-c",
-      cameraNum,
-      `./data/${photoId}`,
-    ]);
 
-    // wait for 2 second
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // take photo and upload
+    async function takeAndUpload() {
+      await execFile("termux-camera-photo", [
+        "-c",
+        cameraNum,
+        `./data/${photoId}`,
+      ]);
 
-    // upload
-    await new Promise(async (resolve, reject) => {
-      setTimeout(resolve, 30000); // 30 second timeout
+      // wait for 2 second
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      try {
-        await detaDrive.put(photoId, {
-          path: __dirname + `/../data/${photoId}`,
-          contentType: "image/jpeg",
-        });
-      } catch (e) {
-        console.log("upload error: ", e);
-      }
-      resolve();
-    });
+      await detaDrive.put(photoId, {
+        path: __dirname + `/../data/${photoId}`,
+        contentType: "image/jpeg",
+      });
+    }
+
+    try {
+      takeAndUpload();
+    } catch (__) {
+      takeAndUpload(); // try again
+    }
 
     // delete local file
     try {
