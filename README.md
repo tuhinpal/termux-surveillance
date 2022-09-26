@@ -38,7 +38,7 @@ Create a file named `.env` in the root directory (Or copy `.env.example`) and ad
 You need to send command through SMS. The command should be in the format `command argument`. For example, `TAKEPHOTO 1` will take a photo from the front camera.
 
 - `CALLME` - Call the number which sent the command.
-- `TAKEPHOTO` - Take a photo from the front camera. The argument should be the camera id. For example, `TAKEPHOTO 1` will take a photo from the front camera (for my old phone).
+- `TAKEPHOTO` - Take a photo from the front camera and send you a secured link of it. The argument should be the camera id. For example, `TAKEPHOTO 1` will take a photo from the front camera (for my old phone).
 
 ### Development 🛠️
 
